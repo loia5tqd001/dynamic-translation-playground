@@ -231,6 +231,36 @@
   background: #e8e8e8;
 }
 
+/* Grey theme for static sections */
+.checkboxes label.checkbox-grey {
+  background: #f3f4f6;
+  border: 2px solid #d1d5db;
+}
+
+.checkboxes label.checkbox-grey:hover {
+  background: #e5e7eb;
+}
+
+/* Green theme for dynamic sections with anchors */
+.checkboxes label.checkbox-green {
+  background: #dcfce7;
+  border: 2px solid #4ade80;
+}
+
+.checkboxes label.checkbox-green:hover {
+  background: #bbf7d0;
+}
+
+/* Yellow theme for static sections with dynamic drawer */
+.checkboxes label.checkbox-yellow {
+  background: #fef3c7;
+  border: 2px solid #fbbf24;
+}
+
+.checkboxes label.checkbox-yellow:hover {
+  background: #fde68a;
+}
+
 .checkboxes input[type="checkbox"] {
   cursor: pointer;
   width: 18px;

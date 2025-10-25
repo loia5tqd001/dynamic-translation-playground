@@ -204,7 +204,7 @@ function App() {
               <strong>Visible Sections:</strong>
             </label>
             <div className="checkboxes">
-              <label>
+              <label className="checkbox-grey">
                 <input
                   type="checkbox"
                   checked={showProductInfo}
@@ -212,7 +212,7 @@ function App() {
                 />
                 <span className="checkbox-icon">📄</span> Product Info (Static)
               </label>
-              <label>
+              <label className="checkbox-green">
                 <input
                   type="checkbox"
                   checked={showReviews}
@@ -220,7 +220,7 @@ function App() {
                 />
                 <span className="checkbox-icon">⚓</span> Product Reviews
               </label>
-              <label>
+              <label className="checkbox-green">
                 <input
                   type="checkbox"
                   checked={showVouchers}
@@ -228,7 +228,7 @@ function App() {
                 />
                 <span className="checkbox-icon">⚓⚓</span> Vouchers
               </label>
-              <label>
+              <label className="checkbox-yellow">
                 <input
                   type="checkbox"
                   checked={showShippingInfo}
