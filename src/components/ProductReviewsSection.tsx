@@ -29,7 +29,7 @@ export const ProductReviewsSection = ({
 
   if (loading) {
     return (
-      <div className="section">
+      <div className="section dynamic-section">
         <h2>⭐ Product Reviews (Review Team)</h2>
         <div className="loading">Loading reviews...</div>
       </div>
@@ -39,7 +39,7 @@ export const ProductReviewsSection = ({
   if (!data) return null;
 
   return (
-    <div className="section">
+    <div className="section dynamic-section">
       <h2>⭐ Product Reviews (Review Team)</h2>
       <div className="status-badge">
         {data.translation_status === 1 ? (

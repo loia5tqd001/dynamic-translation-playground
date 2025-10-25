@@ -1,20 +1,22 @@
 import { useState } from 'react';
 import { GlobalTranslationProvider } from './sdk';
 import { ProductInfoSection } from './components/ProductInfoSection';
-import { ShopInfoSection } from './components/ShopInfoSection';
 import { ProductReviewsSection } from './components/ProductReviewsSection';
 import { VoucherInfoSection } from './components/VoucherInfoSection';
 import { ShippingInfoSection } from './components/ShippingInfoSection';
+import { ProductQADrawer } from './components/ProductQADrawer';
 import './App.css';
 
 function App() {
   // Control panel state
   const [scenario, setScenario] = useState<string>('all-success');
   const [showProductInfo, setShowProductInfo] = useState(true);
-  const [showShopInfo, setShowShopInfo] = useState(true);
   const [showReviews, setShowReviews] = useState(true);
   const [showVouchers, setShowVouchers] = useState(true);
   const [showShippingInfo, setShowShippingInfo] = useState(true);
+
+  // Drawer state
+  const [isQADrawerOpen, setIsQADrawerOpen] = useState(false);
 
   // Get success flags based on scenario
   const getSuccessFlags = () => {
@@ -91,16 +93,6 @@ function App() {
                   </div>
                 </div>
               )}
-              {showShopInfo && (
-                <div className='tree-branch'>
-                  <span className='branch-line'>└─</span>
-                  <div className='tree-node section-node no-anchor'>
-                    <span className='node-icon'>📄</span>
-                    <span className='node-label'>Shop Info</span>
-                    <span className='node-badge'>Static (No Anchor)</span>
-                  </div>
-                </div>
-              )}
               {showReviews && (
                 <div className='tree-branch'>
                   <span className='branch-line'>└─</span>
@@ -124,11 +116,21 @@ function App() {
               {showShippingInfo && (
                 <div className='tree-branch'>
                   <span className='branch-line'>└─</span>
-                  <div className='tree-node section-node no-anchor'>
-                    <span className='node-icon'>📄</span>
+                  <div className='tree-node section-node' style={{ background: '#fef3c7', border: '2px solid #fbbf24' }}>
+                    <span className='node-icon'>📦</span>
                     <span className='node-label'>Shipping Info</span>
-                    <span className='node-badge'>Static (No Anchor)</span>
+                    <span className='node-badge' style={{ background: '#fde68a', color: '#78350f' }}>Static + Dynamic Drawer</span>
                   </div>
+                  {isQADrawerOpen && (
+                    <div style={{ marginLeft: '40px', marginTop: '8px' }}>
+                      <span className='branch-line'>└─</span>
+                      <div className='tree-node section-node has-anchor' style={{ fontSize: '12px' }}>
+                        <span className='node-icon'>⚓</span>
+                        <span className='node-label'>Q&A Drawer</span>
+                        <span className='node-badge'>Dynamic Content</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -143,6 +145,10 @@ function App() {
             <div className='legend-item'>
               <span className='legend-icon'>📄</span>
               <span>= Static content (no anchor, doesn't affect button)</span>
+            </div>
+            <div className='legend-item'>
+              <span className='legend-icon'>📦</span>
+              <span>= Static content that can open dynamic drawer/popup</span>
             </div>
           </div>
         </div>
@@ -182,14 +188,6 @@ function App() {
               <label>
                 <input
                   type='checkbox'
-                  checked={showShopInfo}
-                  onChange={(e) => setShowShopInfo(e.target.checked)}
-                />
-                <span className='checkbox-icon'>📄</span> Shop Info (Static)
-              </label>
-              <label>
-                <input
-                  type='checkbox'
                   checked={showReviews}
                   onChange={(e) => setShowReviews(e.target.checked)}
                 />
@@ -209,7 +207,7 @@ function App() {
                   checked={showShippingInfo}
                   onChange={(e) => setShowShippingInfo(e.target.checked)}
                 />
-                <span className='checkbox-icon'>📄</span> Shipping Info (Static)
+                <span className='checkbox-icon'>📦</span> Shipping Info (Static + Drawer)
               </label>
             </div>
           </div>
@@ -238,8 +236,20 @@ function App() {
                 button
               </li>
               <li>
+                Button is <strong>vertically draggable</strong> - drag it to
+                adjust position and avoid covering content
+              </li>
+              <li>
+                Button z-index (10000) is <strong>above drawer/popup</strong>{' '}
+                (9500) for proper layering
+              </li>
+              <li>
                 💡 <strong>Try scrolling</strong> to see the button
                 appear/disappear based on visible content!
+              </li>
+              <li>
+                💡 <strong>Click "View Product Q&A"</strong> in Shipping Info
+                to see drawer with dynamic content!
               </li>
             </ul>
           </div>
@@ -291,8 +301,6 @@ function App() {
         <main className='content'>
           {showProductInfo && <ProductInfoSection />}
 
-          {showShopInfo && <ShopInfoSection />}
-
           {showReviews && (
             <ProductReviewsSection shouldSucceed={flags.reviews} />
           )}
@@ -301,8 +309,17 @@ function App() {
             <VoucherInfoSection shouldSucceed={flags.vouchers} />
           )}
 
-          {showShippingInfo && <ShippingInfoSection />}
+          {showShippingInfo && (
+            <ShippingInfoSection onOpenQA={() => setIsQADrawerOpen(true)} />
+          )}
         </main>
+
+        {/* Product Q&A Drawer */}
+        <ProductQADrawer
+          isOpen={isQADrawerOpen}
+          onClose={() => setIsQADrawerOpen(false)}
+          shouldSucceed={flags.reviews}
+        />
 
         <footer className='app-footer'>
           <p>

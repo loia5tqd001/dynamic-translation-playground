@@ -32,7 +32,7 @@ export const VoucherInfoSection = ({
 
   if (loading) {
     return (
-      <div className="section">
+      <div className="section dynamic-section">
         <h2>🎟️ Vouchers & Promotions (Marketing Team)</h2>
         <div className="loading">Loading voucher info...</div>
       </div>
@@ -42,7 +42,7 @@ export const VoucherInfoSection = ({
   if (!data) return null;
 
   return (
-    <div className="section">
+    <div className="section dynamic-section">
       <h2>🎟️ Vouchers & Promotions (Marketing Team)</h2>
       <div className="status-badge">
         {data.translation_status === 1 ? (

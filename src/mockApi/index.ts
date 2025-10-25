@@ -4,6 +4,7 @@ import type {
   ProductReviewsData,
   VoucherInfoData,
   ShippingInfoData,
+  ProductQAData,
 } from './types';
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -203,5 +204,71 @@ export const fetchShippingInfo = async (): Promise<ShippingInfoData> => {
     ],
     return_policy: '30-day money-back guarantee',
     tracking_available: true,
+  };
+};
+
+/**
+ * Mock API for Product Q&A (dynamic - has translations, for drawer/popup demo)
+ */
+export const fetchProductQA = async (
+  shouldSucceed: boolean = true
+): Promise<ProductQAData> => {
+  await delay(700);
+
+  if (shouldSucceed) {
+    return {
+      translation_status: 1,
+      questions: [
+        {
+          id: 'Q1',
+          question: 'Does this work with iPhone 15?',
+          question_tr: 'Cái này có hoạt động với iPhone 15 không?',
+          answer: 'Yes, it is fully compatible with iPhone 15 and all newer models.',
+          answer_tr: 'Có, nó hoàn toàn tương thích với iPhone 15 và tất cả các mẫu mới hơn.',
+          date: '2024-10-22',
+        },
+        {
+          id: 'Q2',
+          question: 'What is the battery life?',
+          question_tr: 'Thời lượng pin là bao lâu?',
+          answer: 'Up to 40 hours of continuous playback on a single charge.',
+          answer_tr: 'Lên đến 40 giờ phát liên tục trong một lần sạc.',
+          date: '2024-10-20',
+        },
+        {
+          id: 'Q3',
+          question: 'Is it water resistant?',
+          question_tr: 'Có chống nước không?',
+          answer: 'Yes, it has IPX4 water resistance rating for sweat and light rain.',
+          answer_tr: 'Có, nó có chuẩn chống nước IPX4 chống mồ hôi và mưa nhẹ.',
+          date: '2024-10-18',
+        },
+      ],
+    };
+  }
+
+  // Translation failed
+  return {
+    translation_status: 0,
+    questions: [
+      {
+        id: 'Q1',
+        question: 'Does this work with iPhone 15?',
+        answer: 'Yes, it is fully compatible with iPhone 15 and all newer models.',
+        date: '2024-10-22',
+      },
+      {
+        id: 'Q2',
+        question: 'What is the battery life?',
+        answer: 'Up to 40 hours of continuous playback on a single charge.',
+        date: '2024-10-20',
+      },
+      {
+        id: 'Q3',
+        question: 'Is it water resistant?',
+        answer: 'Yes, it has IPX4 water resistance rating for sweat and light rain.',
+        date: '2024-10-18',
+      },
+    ],
   };
 };

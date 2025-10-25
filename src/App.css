@@ -78,14 +78,16 @@
   border: 2px solid #ddd;
 }
 
+/* Green theme for dynamic content with anchors */
 .section-node.has-anchor {
-  background: #e8f5e9;
-  border-color: #4caf50;
+  background: #dcfce7;
+  border: 2px solid #4ade80;
 }
 
+/* Grey theme for static content without anchors */
 .section-node.no-anchor {
-  background: #fafafa;
-  border-color: #ccc;
+  background: #f3f4f6;
+  border: 2px solid #d1d5db;
 }
 
 .node-icon {
@@ -108,6 +110,18 @@
 
 .provider-node .node-badge {
   background: rgba(255, 255, 255, 0.2);
+}
+
+/* Green badge for dynamic content */
+.section-node.has-anchor .node-badge {
+  background: #bbf7d0;
+  color: #166534;
+}
+
+/* Grey badge for static content */
+.section-node.no-anchor .node-badge {
+  background: #e5e7eb;
+  color: #374151;
 }
 
 .tree-children {
@@ -279,9 +293,22 @@
   margin-bottom: 10px;
 }
 
+/* Grey theme for static sections */
 .static-section {
-  border-color: #ccc;
-  background: #fafafa;
+  border: 2px solid #d1d5db;
+  background: #f9fafb;
+}
+
+/* Green theme for dynamic sections with translation anchors */
+.dynamic-section {
+  border: 2px solid #4ade80;
+  background: #f0fdf4;
+}
+
+/* Yellow theme for static sections with dynamic popup capability */
+.static-section.has-drawer {
+  border: 2px solid #fbbf24;
+  background: #fffbeb;
 }
 
 .complex-section {
@@ -488,5 +515,38 @@
 
   .tree-children {
     margin-left: 20px;
+  }
+
+  /* Improve touch targets on mobile */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Adjust padding for mobile */
+  .app {
+    padding: 10px;
+  }
+
+  .app-header {
+    padding: 20px 10px;
+  }
+
+  .architecture-panel,
+  .control-panel {
+    padding: 15px;
+  }
+
+  /* Make info boxes more readable on mobile */
+  .info-box {
+    font-size: 14px;
+  }
+
+  .info-box ul {
+    padding-left: 20px;
+  }
+
+  .info-box li {
+    margin-bottom: 8px;
   }
 }

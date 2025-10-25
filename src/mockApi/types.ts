@@ -67,3 +67,16 @@ export type ShippingInfoData = {
   return_policy: string;
   tracking_available: boolean;
 };
+
+// Product Q&A API response (dynamic - has translations, for drawer/popup demonstration)
+export type ProductQAData = {
+  translation_status: TranslationStatus;
+  questions: Array<{
+    id: string;
+    question: string;
+    question_tr?: string;
+    answer: string;
+    answer_tr?: string;
+    date: string;
+  }>;
+};
