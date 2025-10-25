@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { TranslationAnchor, useTextTr } from '../sdk';
-import { fetchVoucherInfo } from '../mockApi';
-import type { VoucherInfoData } from '../mockApi/types';
+import React, { useEffect, useState } from 'react'
+import { fetchVoucherInfo } from '../mockApi'
+import type { VoucherInfoData } from '../mockApi/types'
+import { TranslationAnchor, useTextTr } from '../sdk'
 
 /**
  * Voucher Info Section (Marketing Team)
@@ -16,19 +16,19 @@ import type { VoucherInfoData } from '../mockApi/types';
 export const VoucherInfoSection = ({
   shouldSucceed,
 }: {
-  shouldSucceed: boolean;
+  shouldSucceed: boolean
 }) => {
-  const [data, setData] = useState<VoucherInfoData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const getText = useTextTr();
+  const [data, setData] = useState<VoucherInfoData | null>(null)
+  const [loading, setLoading] = useState(true)
+  const getText = useTextTr()
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(true)
     fetchVoucherInfo(shouldSucceed).then((response) => {
-      setData(response);
-      setLoading(false);
-    });
-  }, [shouldSucceed]);
+      setData(response)
+      setLoading(false)
+    })
+  }, [shouldSucceed])
 
   if (loading) {
     return (
@@ -36,10 +36,10 @@ export const VoucherInfoSection = ({
         <h2>🎟️ Vouchers & Promotions (Marketing Team)</h2>
         <div className="loading">Loading voucher info...</div>
       </div>
-    );
+    )
   }
 
-  if (!data) return null;
+  if (!data) return null
 
   return (
     <div className="section dynamic-section">
@@ -58,8 +58,8 @@ export const VoucherInfoSection = ({
         <div className="content-card">
           {data.available_vouchers.map((voucher) => {
             // Example 1: Using useTextTr hook to process text before rendering
-            const title = getText(voucher.title, voucher.title_tr);
-            const titleUppercase = title.toUpperCase(); // Text processing!
+            const title = getText(voucher.title, voucher.title_tr)
+            const titleUppercase = title.toUpperCase() // Text processing!
 
             return (
               <div key={voucher.id} style={{ marginBottom: '15px' }}>
@@ -75,7 +75,7 @@ export const VoucherInfoSection = ({
                   Minimum spend: {voucher.min_spend}
                 </small>
               </div>
-            );
+            )
           })}
         </div>
       </TranslationAnchor>
@@ -87,9 +87,13 @@ export const VoucherInfoSection = ({
           {/* Example 2: Using useTextTr hook for truncation */}
           <p>
             {(() => {
-              const terms = getText(data.voucher_terms.terms, data.voucher_terms.terms_tr);
-              const truncated = terms.length > 60 ? terms.slice(0, 60) + '...' : terms;
-              return truncated;
+              const terms = getText(
+                data.voucher_terms.terms,
+                data.voucher_terms.terms_tr,
+              )
+              const truncated =
+                terms.length > 60 ? terms.slice(0, 60) + '...' : terms
+              return truncated
             })()}
           </p>
           <p>
@@ -98,7 +102,10 @@ export const VoucherInfoSection = ({
           {/* Example 3: Using useTextTr hook for title attribute (non-render context) */}
           <p>
             <button
-              title={getText(data.voucher_terms.terms, data.voucher_terms.terms_tr)}
+              title={getText(
+                data.voucher_terms.terms,
+                data.voucher_terms.terms_tr,
+              )}
               style={{
                 padding: '8px 16px',
                 background: '#3b82f6',
@@ -115,15 +122,16 @@ export const VoucherInfoSection = ({
       </TranslationAnchor>
 
       <div className="team-note">
-        💡 <strong>Translation Pattern:</strong> Using <code>useTextTr</code> hook for text processing
+        💡 <strong>Translation Pattern:</strong> Using <code>useTextTr</code>{' '}
+        hook for text processing
         <br />
         <small>
-          - Example 1 (above): UPPERCASE transformation<br />
-          - Example 2: Text truncation<br />
-          - Example 3: Non-render context (title attribute)<br />
-          ✨ Use the hook when you need to process text before rendering!
+          - Example 1 (above): UPPERCASE transformation
+          <br />- Example 2: Text truncation
+          <br />- Example 3: Non-render context (title attribute)
+          <br />✨ Use the hook when you need to process text before rendering!
         </small>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -2,7 +2,9 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
 }
 
 .app-header {
@@ -272,11 +274,12 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border: 2px solid #e0e0e0;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .section:hover {
-  transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
@@ -451,7 +454,7 @@
 }
 
 .translation-anchor::before {
-  content: '⚓ Translation Anchor';
+  content: "⚓ Translation Anchor";
   position: absolute;
   top: -12px;
   left: 10px;
@@ -471,7 +474,7 @@
 }
 
 .translation-anchor.in-viewport::before {
-  content: '⚓ In Viewport';
+  content: "⚓ In Viewport";
   color: #10b981;
   background: #ecfdf5;
 }
@@ -482,7 +485,7 @@
 }
 
 .translation-anchor.out-viewport::before {
-  content: '⚓ Out of Viewport';
+  content: "⚓ Out of Viewport";
   color: #94a3b8;
 }
 

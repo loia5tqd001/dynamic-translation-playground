@@ -1,14 +1,19 @@
 // Main SDK exports
-export { GlobalTranslationProvider } from './GlobalTranslationProvider';
-export { TranslationAnchor } from './TranslationAnchor';
-export { useTextTr, TextTr, useIsTranslated, useSetIsTranslated } from './GlobalTranslationProvider';
+export {
+  GlobalTranslationProvider,
+  TextTr,
+  useIsTranslated,
+  useSetIsTranslated,
+  useTextTr,
+} from './GlobalTranslationProvider'
+export { TranslationAnchor } from './TranslationAnchor'
 
 // Types
 export type {
-  TranslationStatus,
-  TranslationButtonConfig,
-  TransifyConfig,
-  ToastConfig,
   GlobalTranslationProviderProps,
+  ToastConfig,
+  TransifyConfig,
   TranslationAnchorProps,
-} from './types';
+  TranslationButtonConfig,
+  TranslationStatus,
+} from './types'

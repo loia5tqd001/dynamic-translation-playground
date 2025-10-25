@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { TranslationAnchor, TextTr } from '../sdk';
-import { fetchProductQA } from '../mockApi';
-import type { ProductQAData } from '../mockApi/types';
+import { useEffect, useState } from 'react'
+import { fetchProductQA } from '../mockApi'
+import type { ProductQAData } from '../mockApi/types'
+import { TextTr, TranslationAnchor } from '../sdk'
 
 /**
  * Product Q&A Drawer (Customer Service Team)
@@ -14,31 +14,31 @@ export const ProductQADrawer = ({
   onClose,
   shouldSucceed,
 }: {
-  isOpen: boolean;
-  onClose: () => void;
-  shouldSucceed: boolean;
+  isOpen: boolean
+  onClose: () => void
+  shouldSucceed: boolean
 }) => {
-  const [data, setData] = useState<ProductQAData | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<ProductQAData | null>(null)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (isOpen) {
-      setLoading(true);
+      setLoading(true)
       fetchProductQA(shouldSucceed).then((response) => {
-        setData(response);
-        setLoading(false);
-      });
+        setData(response)
+        setLoading(false)
+      })
     }
-  }, [isOpen, shouldSucceed]);
+  }, [isOpen, shouldSucceed])
 
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
     <>
       {/* Backdrop */}
       <button
-        type='button'
-        className='drawer-backdrop'
+        type="button"
+        className="drawer-backdrop"
         onClick={onClose}
         style={{
           position: 'fixed',
@@ -54,7 +54,7 @@ export const ProductQADrawer = ({
 
       {/* Drawer */}
       <div
-        className='drawer'
+        className="drawer"
         style={{
           position: 'fixed',
           top: 0,
@@ -87,7 +87,7 @@ export const ProductQADrawer = ({
             </h2>
             <button
               onClick={onClose}
-              type='button'
+              type="button"
               style={{
                 background: 'none',
                 border: 'none',
@@ -101,14 +101,14 @@ export const ProductQADrawer = ({
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
-              aria-label='Close drawer'
+              aria-label="Close drawer"
             >
               ✕
             </button>
           </div>
 
           {loading && (
-            <div className='loading' style={{ padding: '20px' }}>
+            <div className="loading" style={{ padding: '20px' }}>
               Loading Q&A...
             </div>
           )}
@@ -116,7 +116,7 @@ export const ProductQADrawer = ({
           {!loading && data && (
             <>
               <div
-                className='status-badge'
+                className="status-badge"
                 style={{
                   marginBottom: '16px',
                   display: 'flex',
@@ -125,7 +125,7 @@ export const ProductQADrawer = ({
               >
                 {data.translation_status === 1 ? (
                   <span
-                    className='status-success'
+                    className="status-success"
                     style={{
                       fontSize: '13px',
                       padding: '6px 12px',
@@ -135,7 +135,7 @@ export const ProductQADrawer = ({
                   </span>
                 ) : (
                   <span
-                    className='status-failed'
+                    className="status-failed"
                     style={{
                       fontSize: '13px',
                       padding: '6px 12px',
@@ -148,7 +148,7 @@ export const ProductQADrawer = ({
 
               {/* Q&A Content with TranslationAnchor */}
               <TranslationAnchor translation_status={data.translation_status}>
-                <div className='content-card'>
+                <div className="content-card">
                   {data.questions.map((qa, index) => (
                     <div
                       key={qa.id}
@@ -207,7 +207,7 @@ export const ProductQADrawer = ({
               </TranslationAnchor>
 
               <div
-                className='team-note'
+                className="team-note"
                 style={{
                   marginTop: '20px',
                   background: '#fef3c7',
@@ -222,10 +222,8 @@ export const ProductQADrawer = ({
                 </div>
                 <div style={{ fontSize: '12px', color: '#78350f' }}>
                   • Translation button only shows when drawer is open
-                  <br />
-                  • Button appears when content has translation_status = 1
-                  <br />
-                  • Button z-index (10000) is above drawer (9500)
+                  <br />• Button appears when content has translation_status = 1
+                  <br />• Button z-index (10000) is above drawer (9500)
                   <br />• Button is draggable to avoid covering content
                 </div>
               </div>
@@ -295,5 +293,5 @@ export const ProductQADrawer = ({
         `}
       </style>
     </>
-  );
-};
+  )
+}

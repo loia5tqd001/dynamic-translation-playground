@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import type { TranslationAnchorProps } from './types';
+import { useEffect, useRef, useState } from 'react'
 import {
-  useIncrementVisibilityCounter,
   useDecrementVisibilityCounter,
-} from './GlobalTranslationProvider';
+  useIncrementVisibilityCounter,
+} from './GlobalTranslationProvider'
+import type { TranslationAnchorProps } from './types'
 
 /**
  * TranslationAnchor - Wrap this around dynamic content areas
@@ -41,51 +41,51 @@ export const TranslationAnchor = ({
   children,
   translation_status,
 }: TranslationAnchorProps) => {
-  const incrementCounter = useIncrementVisibilityCounter();
-  const decrementCounter = useDecrementVisibilityCounter();
-  const elementRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const incrementCounter = useIncrementVisibilityCounter()
+  const decrementCounter = useDecrementVisibilityCounter()
+  const elementRef = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(false)
 
   // Track viewport visibility using IntersectionObserver
   useEffect(() => {
-    const element = elementRef.current;
-    if (!element) return;
+    const element = elementRef.current
+    if (!element) return
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          setIsVisible(entry.isIntersecting);
-        });
+          setIsVisible(entry.isIntersecting)
+        })
       },
       {
         // Trigger when any part of the anchor is visible
         threshold: 0,
         // Add some margin to trigger slightly before entering viewport
         rootMargin: '50px',
-      }
-    );
+      },
+    )
 
-    observer.observe(element);
+    observer.observe(element)
 
     return () => {
-      observer.disconnect();
-    };
-  }, []);
+      observer.disconnect()
+    }
+  }, [])
 
   // Manage counter based on both translation_status and visibility
   useEffect(() => {
-    const shouldCount = translation_status === 1 && isVisible;
+    const shouldCount = translation_status === 1 && isVisible
 
     if (shouldCount) {
-      incrementCounter();
+      incrementCounter()
     }
 
     return () => {
       if (shouldCount) {
-        decrementCounter();
+        decrementCounter()
       }
-    };
-  }, [translation_status, isVisible, incrementCounter, decrementCounter]);
+    }
+  }, [translation_status, isVisible, incrementCounter, decrementCounter])
 
   return (
     <div
@@ -95,5 +95,5 @@ export const TranslationAnchor = ({
     >
       {children}
     </div>
-  );
-};
+  )
+}

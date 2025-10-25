@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { fetchProductInfo } from '../mockApi';
-import type { ProductInfoData } from '../mockApi/types';
+import { useEffect, useState } from 'react'
+import { fetchProductInfo } from '../mockApi'
+import type { ProductInfoData } from '../mockApi/types'
 
 /**
  * Product Info Section (Product Team)
@@ -8,15 +8,15 @@ import type { ProductInfoData } from '../mockApi/types';
  * This section displays basic product information - NO translation needed
  */
 export const ProductInfoSection = () => {
-  const [data, setData] = useState<ProductInfoData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<ProductInfoData | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetchProductInfo().then((response) => {
-      setData(response);
-      setLoading(false);
-    });
-  }, []);
+      setData(response)
+      setLoading(false)
+    })
+  }, [])
 
   if (loading) {
     return (
@@ -24,16 +24,18 @@ export const ProductInfoSection = () => {
         <h2>📱 Product Information</h2>
         <div className="loading">Loading product info...</div>
       </div>
-    );
+    )
   }
 
-  if (!data) return null;
+  if (!data) return null
 
   return (
     <div className="section static-section">
       <h2>📱 Product Information (Product Team)</h2>
       <div className="status-badge">
-        <span className="status-static">⚪ Static Content (No Translation)</span>
+        <span className="status-static">
+          ⚪ Static Content (No Translation)
+        </span>
       </div>
 
       {/* No anchor needed - this is static content */}
@@ -61,5 +63,5 @@ export const ProductInfoSection = () => {
         <small>(Product IDs, prices, and SKUs don't need translation)</small>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { TranslationAnchor, TextTr } from '../sdk';
-import { fetchProductReviews } from '../mockApi';
-import type { ProductReviewsData } from '../mockApi/types';
+import React, { useEffect, useState } from 'react'
+import { fetchProductReviews } from '../mockApi'
+import type { ProductReviewsData } from '../mockApi/types'
+import { TextTr, TranslationAnchor } from '../sdk'
 
 /**
  * Product Reviews Section (Review Team)
@@ -14,43 +14,43 @@ import type { ProductReviewsData } from '../mockApi/types';
 export const ProductReviewsSection = ({
   shouldSucceed,
 }: {
-  shouldSucceed: boolean;
+  shouldSucceed: boolean
 }) => {
-  const [data, setData] = useState<ProductReviewsData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<ProductReviewsData | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(true)
     fetchProductReviews(shouldSucceed).then((response) => {
-      setData(response);
-      setLoading(false);
-    });
-  }, [shouldSucceed]);
+      setData(response)
+      setLoading(false)
+    })
+  }, [shouldSucceed])
 
   if (loading) {
     return (
-      <div className='section dynamic-section'>
+      <div className="section dynamic-section">
         <h2>⭐ Product Reviews (Review Team)</h2>
-        <div className='loading'>Loading reviews...</div>
+        <div className="loading">Loading reviews...</div>
       </div>
-    );
+    )
   }
 
-  if (!data) return null;
+  if (!data) return null
 
   return (
-    <div className='section dynamic-section'>
+    <div className="section dynamic-section">
       <h2>⭐ Product Reviews (Review Team)</h2>
-      <div className='status-badge'>
+      <div className="status-badge">
         {data.translation_status === 1 ? (
-          <span className='status-success'>✓ Translation Available</span>
+          <span className="status-success">✓ Translation Available</span>
         ) : (
-          <span className='status-failed'>✗ Translation Failed</span>
+          <span className="status-failed">✗ Translation Failed</span>
         )}
       </div>
 
       {/* Static summary - no anchor */}
-      <div className='content-card'>
+      <div className="content-card">
         <p>
           <strong>Average Rating:</strong> {data.average_rating} / 5.0 ⭐
         </p>
@@ -61,14 +61,14 @@ export const ProductReviewsSection = ({
 
       {/* Anchor wraps only the dynamic content (review comments) */}
       <TranslationAnchor translation_status={data.translation_status}>
-        <div className='reviews-container'>
+        <div className="reviews-container">
           {data.reviews.map((review) => (
-            <div key={review.id} className='review-card'>
-              <div className='review-header'>
+            <div key={review.id} className="review-card">
+              <div className="review-header">
                 <strong>{review.username}</strong>
-                <span className='rating'>{'⭐'.repeat(review.rating)}</span>
+                <span className="rating">{'⭐'.repeat(review.rating)}</span>
               </div>
-              <p className='review-comment'>
+              <p className="review-comment">
                 <TextTr
                   original={review.comment}
                   translation={review.comment_tr}
@@ -80,7 +80,7 @@ export const ProductReviewsSection = ({
         </div>
       </TranslationAnchor>
 
-      <div className='team-note'>
+      <div className="team-note">
         💡 <strong>Translation Pattern:</strong> Using <code>TextTr</code>{' '}
         component for direct rendering
         <br />
@@ -90,5 +90,5 @@ export const ProductReviewsSection = ({
         </small>
       </div>
     </div>
-  );
-};
+  )
+}

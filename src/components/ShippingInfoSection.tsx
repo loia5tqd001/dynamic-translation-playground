@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { fetchShippingInfo } from '../mockApi';
-import type { ShippingInfoData } from '../mockApi/types';
+import React, { useEffect, useState } from 'react'
+import { fetchShippingInfo } from '../mockApi'
+import type { ShippingInfoData } from '../mockApi/types'
 
 /**
  * Shipping Info Section (Shipping Team)
@@ -11,15 +11,15 @@ import type { ShippingInfoData } from '../mockApi/types';
  * Different from truly static sections (ProductInfo, ShopInfo) that have no dynamic content at all
  */
 export const ShippingInfoSection = ({ onOpenQA }: { onOpenQA: () => void }) => {
-  const [data, setData] = useState<ShippingInfoData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<ShippingInfoData | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetchShippingInfo().then((response) => {
-      setData(response);
-      setLoading(false);
-    });
-  }, []);
+      setData(response)
+      setLoading(false)
+    })
+  }, [])
 
   if (loading) {
     return (
@@ -27,16 +27,19 @@ export const ShippingInfoSection = ({ onOpenQA }: { onOpenQA: () => void }) => {
         <h2>🚚 Shipping Information</h2>
         <div className="loading">Loading shipping info...</div>
       </div>
-    );
+    )
   }
 
-  if (!data) return null;
+  if (!data) return null
 
   return (
     <div className="section static-section has-drawer">
       <h2>🚚 Shipping Information (Shipping Team)</h2>
       <div className="status-badge">
-        <span className="status-static" style={{ background: '#fef3c7', color: '#92400e' }}>
+        <span
+          className="status-static"
+          style={{ background: '#fef3c7', color: '#92400e' }}
+        >
           📦 Static Content + Dynamic Popup
         </span>
       </div>
@@ -55,13 +58,20 @@ export const ShippingInfoSection = ({ onOpenQA }: { onOpenQA: () => void }) => {
           </div>
         ))}
 
-        <hr style={{ margin: '20px 0', border: 'none', borderTop: '1px solid #e0e0e0' }} />
+        <hr
+          style={{
+            margin: '20px 0',
+            border: 'none',
+            borderTop: '1px solid #e0e0e0',
+          }}
+        />
 
         <p>
           <strong>Return Policy:</strong> {data.return_policy}
         </p>
         <p>
-          <strong>Tracking:</strong> {data.tracking_available ? '✓ Available' : '✗ Not available'}
+          <strong>Tracking:</strong>{' '}
+          {data.tracking_available ? '✓ Available' : '✗ Not available'}
         </p>
 
         <div style={{ marginTop: '20px' }}>
@@ -84,19 +94,22 @@ export const ShippingInfoSection = ({ onOpenQA }: { onOpenQA: () => void }) => {
         </div>
       </div>
 
-      <div className="team-note" style={{ background: '#fef3c7', borderColor: '#fbbf24' }}>
-        💡 <strong>Pattern:</strong> Static section that can trigger dynamic content
+      <div
+        className="team-note"
+        style={{ background: '#fef3c7', borderColor: '#fbbf24' }}
+      >
+        💡 <strong>Pattern:</strong> Static section that can trigger dynamic
+        content
         <br />
         <small>
           - This section itself is static (no anchor)
-          <br />
-          - But clicking the button opens a drawer with dynamic content
-          <br />
-          - Translation button only shows when drawer is open with translated content
-          <br />
-          - Different from truly static sections (Product Info, Shop Info) that have no dynamic content at all
+          <br />- But clicking the button opens a drawer with dynamic content
+          <br />- Translation button only shows when drawer is open with
+          translated content
+          <br />- Different from truly static sections (Product Info, Shop Info)
+          that have no dynamic content at all
         </small>
       </div>
     </div>
-  );
-};
+  )
+}
