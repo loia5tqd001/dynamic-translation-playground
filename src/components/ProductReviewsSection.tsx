@@ -1,0 +1,83 @@
+import React, { useEffect, useState } from 'react';
+import { TranslationAnchor, useTextTr } from '../sdk';
+import { fetchProductReviews } from '../mockApi';
+import type { ProductReviewsData } from '../mockApi/types';
+
+/**
+ * Product Reviews Section (Review Team)
+ * Pattern: 1 API → 1 Anchor
+ * This section has dynamic content from a single API
+ */
+export const ProductReviewsSection = ({
+  shouldSucceed,
+}: {
+  shouldSucceed: boolean;
+}) => {
+  const [data, setData] = useState<ProductReviewsData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const getText = useTextTr();
+
+  useEffect(() => {
+    setLoading(true);
+    fetchProductReviews(shouldSucceed).then((response) => {
+      setData(response);
+      setLoading(false);
+    });
+  }, [shouldSucceed]);
+
+  if (loading) {
+    return (
+      <div className="section">
+        <h2>⭐ Product Reviews (Review Team)</h2>
+        <div className="loading">Loading reviews...</div>
+      </div>
+    );
+  }
+
+  if (!data) return null;
+
+  return (
+    <div className="section">
+      <h2>⭐ Product Reviews (Review Team)</h2>
+      <div className="status-badge">
+        {data.translation_status === 1 ? (
+          <span className="status-success">✓ Translation Available</span>
+        ) : (
+          <span className="status-failed">✗ Translation Failed</span>
+        )}
+      </div>
+
+      {/* Static summary - no anchor */}
+      <div className="content-card">
+        <p>
+          <strong>Average Rating:</strong> {data.average_rating} / 5.0 ⭐
+        </p>
+        <p>
+          <strong>Total Reviews:</strong> {data.total_reviews}
+        </p>
+      </div>
+
+      {/* Anchor wraps only the dynamic content (review comments) */}
+      <TranslationAnchor translation_status={data.translation_status}>
+        <div className="reviews-container">
+          {data.reviews.map((review) => (
+            <div key={review.id} className="review-card">
+              <div className="review-header">
+                <strong>{review.username}</strong>
+                <span className="rating">{'⭐'.repeat(review.rating)}</span>
+              </div>
+              <p className="review-comment">
+                {getText(review.comment, review.comment_tr)}
+              </p>
+              <small style={{ color: '#999' }}>{review.date}</small>
+            </div>
+          ))}
+        </div>
+      </TranslationAnchor>
+
+      <div className="team-note">
+        💡 <strong>Pattern:</strong> Single API, single anchor around all review comments
+      </div>
+    </div>
+  );
+};
