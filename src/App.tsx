@@ -8,9 +8,13 @@ import { VoucherInfoSection } from './components/VoucherInfoSection'
 import { GlobalTranslationProvider } from './sdk'
 import './App.css'
 
+// Platform types defined in consuming application (outside SDK)
+type Platform = 'PC' | 'RW'
+
 function App() {
   // Control panel state
   const [scenario, setScenario] = useState<string>('all-success')
+  const [platform, setPlatform] = useState<Platform>('RW')
   const [showProductInfo, setShowProductInfo] = useState(true)
   const [showReviews, setShowReviews] = useState(true)
   const [showVouchers, setShowVouchers] = useState(true)
@@ -53,11 +57,17 @@ function App() {
 
   const flags = getSuccessFlags()
 
+  // Platform-specific logic (outside SDK)
+  // PC: Always translated, button hidden, no user control
+  // RW: User can toggle, button visible and draggable
+  const isPCPlatform = platform === 'PC'
+
   return (
     <GlobalTranslationProvider
       buttonConfig={{
         verticalSpacing: 'bottom',
         spacingValue: '20px',
+        hideButton: isPCPlatform, // Hide button on PC platform
       }}
       transifyConfig={{
         translateText: 'Translate',
@@ -67,6 +77,7 @@ function App() {
       toastConfig={{
         bottomSpacing: '80px',
       }}
+      forceTranslated={isPCPlatform} // Force translation on PC platform
     >
       <div className="app">
         <header className="app-header">
@@ -182,6 +193,33 @@ function App() {
 
         <div className="control-panel">
           <h3>🎮 Control Panel</h3>
+
+          <div className="control-group">
+            <label>
+              <strong>Platform:</strong>
+            </label>
+            <select
+              value={platform}
+              onChange={(e) => setPlatform(e.target.value as Platform)}
+              className="scenario-select"
+            >
+              <option value="RW">📱 RW (User Controlled)</option>
+              <option value="PC">💻 PC (Always Translated)</option>
+            </select>
+            <div style={{ fontSize: '12px', marginTop: '8px', color: '#666' }}>
+              {platform === 'PC' ? (
+                <span>
+                  🔒 <strong>PC Mode:</strong> Translation is always ON, button
+                  is hidden
+                </span>
+              ) : (
+                <span>
+                  🔓 <strong>RW Mode:</strong> User can toggle translation,
+                  button is visible and draggable
+                </span>
+              )}
+            </div>
+          </div>
 
           <div className="control-group">
             <label>

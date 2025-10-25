@@ -2,8 +2,6 @@
 export {
   GlobalTranslationProvider,
   TextTr,
-  useIsTranslated,
-  useSetIsTranslated,
   useTextTr,
 } from './GlobalTranslationProvider'
 export { TranslationAnchor } from './TranslationAnchor'

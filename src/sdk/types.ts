@@ -8,6 +8,11 @@ export type TranslationButtonConfig = {
   zIndex?: React.CSSProperties['zIndex']
   onTranslationStateChange?: (isTranslated: boolean) => void
   refCallback?: (el: Element | null, isTranslated: boolean) => void
+  /**
+   * Hide the translation button completely
+   * Useful for platforms where translation is always on
+   */
+  hideButton?: boolean
 }
 
 export type TransifyConfig = {
@@ -34,6 +39,11 @@ export type GlobalTranslationProviderProps = {
    * The config for the toast
    */
   toastConfig?: ToastConfig
+  /**
+   * Force translation to always be on (disables toggling)
+   * Useful for platforms where translation should always be active
+   */
+  forceTranslated?: boolean
 }
 
 export type TranslationAnchorProps = {

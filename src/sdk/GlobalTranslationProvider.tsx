@@ -28,9 +28,14 @@ export const GlobalTranslationProvider = ({
   buttonConfig = {},
   transifyConfig = {},
   toastConfig = {},
+  forceTranslated = false,
 }: GlobalTranslationProviderProps) => {
+  const { hideButton = false } = buttonConfig
+
   // isTranslated: global state, initialized to true, persisted to sessionStorage
+  // When forceTranslated is true, always initialize to true
   const [isTranslated, setIsTranslated] = useState<boolean>(() => {
+    if (forceTranslated) return true
     try {
       const stored = sessionStorage.getItem(STORAGE_KEY)
       return stored !== null ? JSON.parse(stored) : true
@@ -40,17 +45,19 @@ export const GlobalTranslationProvider = ({
   })
 
   // Visibility counter: starts at 0, button shows when counter > 0
+  // Button can be hidden via hideButton prop
   const [visibilityCounter, setVisibilityCounter] = useState<number>(0)
-  const isButtonVisible = visibilityCounter > 0
+  const isButtonVisible = !hideButton && visibilityCounter > 0
 
-  // Persist isTranslated to sessionStorage
+  // Persist isTranslated to sessionStorage (not applicable when forceTranslated is true)
   useEffect(() => {
+    if (forceTranslated) return
     try {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(isTranslated))
     } catch {
       // Ignore storage errors
     }
-  }, [isTranslated])
+  }, [isTranslated, forceTranslated])
 
   const incrementVisibilityCounter = useCallback(() => {
     setVisibilityCounter((prev) => prev + 1)
@@ -61,8 +68,17 @@ export const GlobalTranslationProvider = ({
   }, [])
 
   const toggleTranslation = useCallback(() => {
+    // Don't allow toggling when forceTranslated is true
+    if (forceTranslated) return
     setIsTranslated((prev) => !prev)
-  }, [])
+  }, [forceTranslated])
+
+  // Force isTranslated to true when forceTranslated prop is enabled
+  useEffect(() => {
+    if (forceTranslated && !isTranslated) {
+      setIsTranslated(true)
+    }
+  }, [forceTranslated, isTranslated])
 
   return (
     <ToastProvider config={toastConfig}>

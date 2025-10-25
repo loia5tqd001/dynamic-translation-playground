@@ -68,7 +68,6 @@ export const TranslationButton = ({
   }
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    e.preventDefault()
     setIsDragging(true)
     setHasMoved(false)
     dragStartY.current = e.touches[0].clientY
