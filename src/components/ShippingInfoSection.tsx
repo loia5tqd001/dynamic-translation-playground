@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { fetchShippingInfo } from '../mockApi'
 import type { ShippingInfoData } from '../mockApi/types'
 
