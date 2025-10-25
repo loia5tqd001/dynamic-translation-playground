@@ -4,6 +4,7 @@ import { ProductInfoSection } from './components/ProductInfoSection';
 import { ShopInfoSection } from './components/ShopInfoSection';
 import { ProductReviewsSection } from './components/ProductReviewsSection';
 import { VoucherInfoSection } from './components/VoucherInfoSection';
+import { ShippingInfoSection } from './components/ShippingInfoSection';
 import './App.css';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
   const [showShopInfo, setShowShopInfo] = useState(true);
   const [showReviews, setShowReviews] = useState(true);
   const [showVouchers, setShowVouchers] = useState(true);
+  const [showShippingInfo, setShowShippingInfo] = useState(true);
 
   // Get success flags based on scenario
   const getSuccessFlags = () => {
@@ -25,11 +27,6 @@ function App() {
       case 'all-fail':
         return {
           reviews: false,
-          vouchers: false,
-        };
-      case 'mixed':
-        return {
-          reviews: true,
           vouchers: false,
         };
       case 'only-reviews':
@@ -59,172 +56,239 @@ function App() {
         spacingValue: '20px',
       }}
       transifyConfig={{
-        translateText: 'Dịch',
-        seeOriginalText: 'Xem bản gốc',
-        updateToastText: 'Ngôn ngữ đã cập nhật',
+        translateText: 'Translate',
+        seeOriginalText: 'See Original',
+        updateToastText: 'Language updated',
       }}
       toastConfig={{
         bottomSpacing: '80px',
       }}
     >
-      <div className="app">
-        <header className="app-header">
+      <div className='app'>
+        <header className='app-header'>
           <h1>🌐 Dynamic Translation SDK - Product Detail Page</h1>
-          <p className="subtitle">
+          <p className='subtitle'>
             Global Provider + Multiple Anchors Pattern Demo
           </p>
         </header>
 
         {/* Architecture Visualization */}
-        <div className="architecture-panel">
+        <div className='architecture-panel'>
           <h3>📊 Page Architecture</h3>
-          <div className="architecture-tree">
-            <div className="tree-node provider-node">
-              <span className="node-icon">🌍</span>
-              <span className="node-label">GlobalTranslationProvider</span>
-              <span className="node-desc">(wraps entire page)</span>
+          <div className='architecture-tree'>
+            <div className='tree-node provider-node'>
+              <span className='node-icon'>🌍</span>
+              <span className='node-label'>GlobalTranslationProvider</span>
             </div>
-            <div className="tree-children">
+            <div className='tree-children'>
               {showProductInfo && (
-                <div className="tree-branch">
-                  <span className="branch-line">└─</span>
-                  <div className="tree-node section-node no-anchor">
-                    <span className="node-icon">📄</span>
-                    <span className="node-label">Product Info</span>
-                    <span className="node-badge">Static (No Anchor)</span>
+                <div className='tree-branch'>
+                  <span className='branch-line'>└─</span>
+                  <div className='tree-node section-node no-anchor'>
+                    <span className='node-icon'>📄</span>
+                    <span className='node-label'>Product Info</span>
+                    <span className='node-badge'>Static (No Anchor)</span>
                   </div>
                 </div>
               )}
               {showShopInfo && (
-                <div className="tree-branch">
-                  <span className="branch-line">└─</span>
-                  <div className="tree-node section-node no-anchor">
-                    <span className="node-icon">📄</span>
-                    <span className="node-label">Shop Info</span>
-                    <span className="node-badge">Static (No Anchor)</span>
+                <div className='tree-branch'>
+                  <span className='branch-line'>└─</span>
+                  <div className='tree-node section-node no-anchor'>
+                    <span className='node-icon'>📄</span>
+                    <span className='node-label'>Shop Info</span>
+                    <span className='node-badge'>Static (No Anchor)</span>
                   </div>
                 </div>
               )}
               {showReviews && (
-                <div className="tree-branch">
-                  <span className="branch-line">└─</span>
-                  <div className="tree-node section-node has-anchor">
-                    <span className="node-icon">⚓</span>
-                    <span className="node-label">Product Reviews</span>
-                    <span className="node-badge">1 API → 1 Anchor</span>
+                <div className='tree-branch'>
+                  <span className='branch-line'>└─</span>
+                  <div className='tree-node section-node has-anchor'>
+                    <span className='node-icon'>⚓</span>
+                    <span className='node-label'>Product Reviews</span>
+                    <span className='node-badge'>1 API → 1 Anchor</span>
                   </div>
                 </div>
               )}
               {showVouchers && (
-                <div className="tree-branch">
-                  <span className="branch-line">└─</span>
-                  <div className="tree-node section-node has-anchor">
-                    <span className="node-icon">⚓⚓</span>
-                    <span className="node-label">Vouchers</span>
-                    <span className="node-badge">1 API → 2 Anchors</span>
+                <div className='tree-branch'>
+                  <span className='branch-line'>└─</span>
+                  <div className='tree-node section-node has-anchor'>
+                    <span className='node-icon'>⚓⚓</span>
+                    <span className='node-label'>Vouchers</span>
+                    <span className='node-badge'>1 API → 2 Anchors</span>
+                  </div>
+                </div>
+              )}
+              {showShippingInfo && (
+                <div className='tree-branch'>
+                  <span className='branch-line'>└─</span>
+                  <div className='tree-node section-node no-anchor'>
+                    <span className='node-icon'>📄</span>
+                    <span className='node-label'>Shipping Info</span>
+                    <span className='node-badge'>Static (No Anchor)</span>
                   </div>
                 </div>
               )}
             </div>
           </div>
-          <div className="legend">
-            <div className="legend-item">
-              <span className="legend-icon">⚓</span>
-              <span>= Has TranslationAnchor (contributes to button visibility)</span>
+          <div className='legend'>
+            <div className='legend-item'>
+              <span className='legend-icon'>⚓</span>
+              <span>
+                = Has TranslationAnchor (contributes to button visibility)
+              </span>
             </div>
-            <div className="legend-item">
-              <span className="legend-icon">📄</span>
+            <div className='legend-item'>
+              <span className='legend-icon'>📄</span>
               <span>= Static content (no anchor, doesn't affect button)</span>
             </div>
           </div>
         </div>
 
-        <div className="control-panel">
+        <div className='control-panel'>
           <h3>🎮 Control Panel</h3>
 
-          <div className="control-group">
+          <div className='control-group'>
             <label>
               <strong>Translation Scenario:</strong>
             </label>
             <select
               value={scenario}
               onChange={(e) => setScenario(e.target.value)}
-              className="scenario-select"
+              className='scenario-select'
             >
-              <option value="all-success">
-                ✓ All translations successful
-              </option>
-              <option value="all-fail">✗ All translations failed</option>
-              <option value="mixed">⚡ Mixed (reviews OK, vouchers fail)</option>
-              <option value="only-reviews">
-                🎯 Only reviews success
-              </option>
-              <option value="only-vouchers">
-                🎟️ Only vouchers success
-              </option>
+              <option value='all-success'>✓ All translations successful</option>
+              <option value='all-fail'>✗ All translations failed</option>
+              <option value='only-reviews'>🎯 Only reviews success</option>
+              <option value='only-vouchers'>🎟️ Only vouchers success</option>
             </select>
           </div>
 
-          <div className="control-group">
+          <div className='control-group'>
             <label>
               <strong>Visible Sections:</strong>
             </label>
-            <div className="checkboxes">
+            <div className='checkboxes'>
               <label>
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   checked={showProductInfo}
                   onChange={(e) => setShowProductInfo(e.target.checked)}
                 />
-                <span className="checkbox-icon">📄</span> Product Info (Static)
+                <span className='checkbox-icon'>📄</span> Product Info (Static)
               </label>
               <label>
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   checked={showShopInfo}
                   onChange={(e) => setShowShopInfo(e.target.checked)}
                 />
-                <span className="checkbox-icon">📄</span> Shop Info (Static)
+                <span className='checkbox-icon'>📄</span> Shop Info (Static)
               </label>
               <label>
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   checked={showReviews}
                   onChange={(e) => setShowReviews(e.target.checked)}
                 />
-                <span className="checkbox-icon">⚓</span> Product Reviews
+                <span className='checkbox-icon'>⚓</span> Product Reviews
               </label>
               <label>
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   checked={showVouchers}
                   onChange={(e) => setShowVouchers(e.target.checked)}
                 />
-                <span className="checkbox-icon">⚓⚓</span> Vouchers
+                <span className='checkbox-icon'>⚓⚓</span> Vouchers
+              </label>
+              <label>
+                <input
+                  type='checkbox'
+                  checked={showShippingInfo}
+                  onChange={(e) => setShowShippingInfo(e.target.checked)}
+                />
+                <span className='checkbox-icon'>📄</span> Shipping Info (Static)
               </label>
             </div>
           </div>
 
-          <div className="info-box">
+          <div className='info-box'>
             <strong>📌 Key Rules:</strong>
             <ul>
               <li>
-                Button shows when <strong>counter &gt; 0</strong> (at least one anchor with translation_status = 1)
+                Button shows when at least one anchor is{' '}
+                <strong>visible in viewport</strong> with translation_status = 1
               </li>
               <li>
-                Each anchor <strong>increments counter</strong> on mount (if translation_status = 1)
+                Each anchor uses <strong>IntersectionObserver</strong> to detect
+                viewport visibility
               </li>
               <li>
-                Each anchor <strong>decrements counter</strong> on unmount
+                Button <strong>auto-hides</strong> when you scroll past all
+                translated content
               </li>
               <li>
-                Static sections don't have anchors, so they don't affect the counter
+                Button <strong>auto-shows</strong> when translated content
+                enters viewport
+              </li>
+              <li>
+                Static sections don't have anchors, so they don't affect the
+                button
+              </li>
+              <li>
+                💡 <strong>Try scrolling</strong> to see the button
+                appear/disappear based on visible content!
+              </li>
+            </ul>
+          </div>
+
+          <div
+            className='info-box'
+            style={{ background: '#f0fdf4', borderColor: '#10b981' }}
+          >
+            <strong>🎨 Translation Patterns (TextTr vs useTextTr):</strong>
+            <ul>
+              <li>
+                <strong>TextTr component</strong> (Product Reviews): Direct
+                rendering without processing
+                <br />
+                <code
+                  style={{
+                    background: '#e0e7ff',
+                    padding: '2px 6px',
+                    borderRadius: '4px',
+                  }}
+                >
+                  &lt;TextTr original="text" translated="texto" /&gt;
+                </code>
+              </li>
+              <li>
+                <strong>useTextTr hook</strong> (Vouchers): Process text before
+                rendering
+                <br />
+                <code
+                  style={{
+                    background: '#e0e7ff',
+                    padding: '2px 6px',
+                    borderRadius: '4px',
+                  }}
+                >
+                  const text = useTextTr(); text(...).toUpperCase()
+                </code>
+              </li>
+              <li>
+                <strong>When to use each:</strong>
+                <br />→ Use <code>TextTr</code> for simple, direct rendering
+                <br />→ Use <code>useTextTr</code> for uppercase, truncation,
+                interpolation, or title attributes
               </li>
             </ul>
           </div>
         </div>
 
-        <main className="content">
+        <main className='content'>
           {showProductInfo && <ProductInfoSection />}
 
           {showShopInfo && <ShopInfoSection />}
@@ -236,14 +300,18 @@ function App() {
           {showVouchers && (
             <VoucherInfoSection shouldSucceed={flags.vouchers} />
           )}
+
+          {showShippingInfo && <ShippingInfoSection />}
         </main>
 
-        <footer className="app-footer">
+        <footer className='app-footer'>
           <p>
-            💡 Try different scenarios and toggle sections to see the translation button behavior
+            💡 Try different scenarios and toggle sections to see the
+            translation button behavior
           </p>
           <p style={{ fontSize: '12px', marginTop: '10px', color: '#999' }}>
-            Product Detail Page Demo - Showcasing static and dynamic content patterns
+            Product Detail Page Demo - Showcasing static and dynamic content
+            patterns
           </p>
         </footer>
       </div>

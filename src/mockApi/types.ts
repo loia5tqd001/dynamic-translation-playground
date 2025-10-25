@@ -55,3 +55,15 @@ export type VoucherInfoData = {
     expiry: string;
   };
 };
+
+// Shipping Info API response (static - no translation needed)
+export type ShippingInfoData = {
+  shipping_methods: Array<{
+    id: string;
+    name: string;
+    delivery_time: string;
+    cost: string;
+  }>;
+  return_policy: string;
+  tracking_available: boolean;
+};

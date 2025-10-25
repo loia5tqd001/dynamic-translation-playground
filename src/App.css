@@ -414,6 +414,51 @@
   font-size: 14px;
 }
 
+/* Translation Anchor Visualization */
+.translation-anchor {
+  position: relative;
+  border: 2px dashed #cbd5e1;
+  border-radius: 8px;
+  padding: 2px;
+  transition: all 0.3s ease;
+}
+
+.translation-anchor::before {
+  content: '⚓ Translation Anchor';
+  position: absolute;
+  top: -12px;
+  left: 10px;
+  background: white;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.translation-anchor.in-viewport {
+  border-color: #10b981;
+  border-style: solid;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.translation-anchor.in-viewport::before {
+  content: '⚓ In Viewport';
+  color: #10b981;
+  background: #ecfdf5;
+}
+
+.translation-anchor.out-viewport {
+  border-color: #e2e8f0;
+  opacity: 0.7;
+}
+
+.translation-anchor.out-viewport::before {
+  content: '⚓ Out of Viewport';
+  color: #94a3b8;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .app {

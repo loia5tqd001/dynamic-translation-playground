@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { TranslationAnchor, useTextTr } from '../sdk';
+import { TranslationAnchor, TextTr } from '../sdk';
 import { fetchProductReviews } from '../mockApi';
 import type { ProductReviewsData } from '../mockApi/types';
 
 /**
  * Product Reviews Section (Review Team)
  * Pattern: 1 API → 1 Anchor
- * This section has dynamic content from a single API
+ * Translation Pattern: Using TextTr COMPONENT for direct rendering
+ *
+ * This section demonstrates using the TextTr component when you just need
+ * to render translated text without any processing.
  */
 export const ProductReviewsSection = ({
   shouldSucceed,
@@ -15,7 +18,6 @@ export const ProductReviewsSection = ({
 }) => {
   const [data, setData] = useState<ProductReviewsData | null>(null);
   const [loading, setLoading] = useState(true);
-  const getText = useTextTr();
 
   useEffect(() => {
     setLoading(true);
@@ -67,7 +69,7 @@ export const ProductReviewsSection = ({
                 <span className="rating">{'⭐'.repeat(review.rating)}</span>
               </div>
               <p className="review-comment">
-                {getText(review.comment, review.comment_tr)}
+                <TextTr original={review.comment} translated={review.comment_tr} />
               </p>
               <small style={{ color: '#999' }}>{review.date}</small>
             </div>
@@ -76,7 +78,11 @@ export const ProductReviewsSection = ({
       </TranslationAnchor>
 
       <div className="team-note">
-        💡 <strong>Pattern:</strong> Single API, single anchor around all review comments
+        💡 <strong>Translation Pattern:</strong> Using <code>TextTr</code> component for direct rendering
+        <br />
+        <small>
+          Perfect for simple cases where you just need to display translated text as-is
+        </small>
       </div>
     </div>
   );

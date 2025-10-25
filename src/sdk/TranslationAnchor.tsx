@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { TranslationAnchorProps } from './types';
 import {
   useIncrementVisibilityCounter,
@@ -8,10 +8,13 @@ import {
 /**
  * TranslationAnchor - Wrap this around dynamic content areas
  *
- * This component manages button visibility by incrementing/decrementing a counter.
- * When mounted with dynamic content (translation_status === 1), it increments the counter.
- * When unmounted, it decrements the counter.
- * The translation button is visible when counter > 0.
+ * This component manages button visibility by tracking both:
+ * 1. Whether it has translated content (translation_status === 1)
+ * 2. Whether it's visible in the viewport (using IntersectionObserver)
+ *
+ * The translation button only shows when at least one anchor is:
+ * - Has translation_status === 1 AND
+ * - Is visible in the viewport
  *
  * Usage patterns:
  * 1. One API, one anchor:
@@ -40,20 +43,57 @@ export const TranslationAnchor = ({
 }: TranslationAnchorProps) => {
   const incrementCounter = useIncrementVisibilityCounter();
   const decrementCounter = useDecrementVisibilityCounter();
+  const elementRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
+  // Track viewport visibility using IntersectionObserver
   useEffect(() => {
-    // Only increment if translation_status is 1 (has dynamic content)
-    if (translation_status === 1) {
+    const element = elementRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting);
+        });
+      },
+      {
+        // Trigger when any part of the anchor is visible
+        threshold: 0,
+        // Add some margin to trigger slightly before entering viewport
+        rootMargin: '50px',
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // Manage counter based on both translation_status and visibility
+  useEffect(() => {
+    const shouldCount = translation_status === 1 && isVisible;
+
+    if (shouldCount) {
       incrementCounter();
     }
 
-    // Cleanup: decrement on unmount or when translation_status changes
     return () => {
-      if (translation_status === 1) {
+      if (shouldCount) {
         decrementCounter();
       }
     };
-  }, [translation_status, incrementCounter, decrementCounter]);
+  }, [translation_status, isVisible, incrementCounter, decrementCounter]);
 
-  return <>{children}</>;
+  return (
+    <div
+      ref={elementRef}
+      className={`translation-anchor ${isVisible ? 'in-viewport' : 'out-viewport'}`}
+      data-translation-status={translation_status}
+    >
+      {children}
+    </div>
+  );
 };

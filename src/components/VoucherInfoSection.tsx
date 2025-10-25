@@ -6,7 +6,12 @@ import type { VoucherInfoData } from '../mockApi/types';
 /**
  * Voucher Info Section (Marketing Team)
  * Pattern: 1 API → 2 Anchors (separate sections from same API)
- * This section demonstrates using multiple anchors for different dynamic sections from one API
+ * Translation Pattern: Using useTextTr HOOK for text processing
+ *
+ * This section demonstrates using the useTextTr hook when you need to:
+ * - Process text before rendering (uppercase, truncation, etc.)
+ * - Interpolate variables into text
+ * - Use text in non-render contexts (aria-label, title, etc.)
  */
 export const VoucherInfoSection = ({
   shouldSucceed,
@@ -51,18 +56,27 @@ export const VoucherInfoSection = ({
       <h3>Available Vouchers</h3>
       <TranslationAnchor translation_status={data.translation_status}>
         <div className="content-card">
-          {data.available_vouchers.map((voucher) => (
-            <div key={voucher.id} style={{ marginBottom: '15px' }}>
-              <p>
-                <strong>Code:</strong> <code>{voucher.code}</code> -{' '}
-                <strong>{voucher.discount}</strong>
-              </p>
-              <p>{getText(voucher.title, voucher.title_tr)}</p>
-              <small style={{ color: '#666' }}>
-                Minimum spend: {voucher.min_spend}
-              </small>
-            </div>
-          ))}
+          {data.available_vouchers.map((voucher) => {
+            // Example 1: Using useTextTr hook to process text before rendering
+            const title = getText(voucher.title, voucher.title_tr);
+            const titleUppercase = title.toUpperCase(); // Text processing!
+
+            return (
+              <div key={voucher.id} style={{ marginBottom: '15px' }}>
+                <p>
+                  <strong>Code:</strong> <code>{voucher.code}</code> -{' '}
+                  <strong>{voucher.discount}</strong>
+                </p>
+                {/* Rendered with uppercase transformation */}
+                <p style={{ fontWeight: 600, color: '#dc2626' }}>
+                  {titleUppercase}
+                </p>
+                <small style={{ color: '#666' }}>
+                  Minimum spend: {voucher.min_spend}
+                </small>
+              </div>
+            );
+          })}
         </div>
       </TranslationAnchor>
 
@@ -70,19 +84,44 @@ export const VoucherInfoSection = ({
       <h3>Terms & Conditions</h3>
       <TranslationAnchor translation_status={data.translation_status}>
         <div className="content-card">
-          <p>{getText(data.voucher_terms.terms, data.voucher_terms.terms_tr)}</p>
+          {/* Example 2: Using useTextTr hook for truncation */}
+          <p>
+            {(() => {
+              const terms = getText(data.voucher_terms.terms, data.voucher_terms.terms_tr);
+              const truncated = terms.length > 60 ? terms.slice(0, 60) + '...' : terms;
+              return truncated;
+            })()}
+          </p>
           <p>
             <strong>Expires:</strong> {data.voucher_terms.expiry}
+          </p>
+          {/* Example 3: Using useTextTr hook for title attribute (non-render context) */}
+          <p>
+            <button
+              title={getText(data.voucher_terms.terms, data.voucher_terms.terms_tr)}
+              style={{
+                padding: '8px 16px',
+                background: '#3b82f6',
+                color: 'white',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: 'pointer',
+              }}
+            >
+              View Full Terms
+            </button>
           </p>
         </div>
       </TranslationAnchor>
 
       <div className="team-note">
-        💡 <strong>Pattern:</strong> Single API, multiple anchors for different
-        dynamic sections
+        💡 <strong>Translation Pattern:</strong> Using <code>useTextTr</code> hook for text processing
         <br />
         <small>
-          (Each anchor independently contributes to button visibility counter)
+          - Example 1 (above): UPPERCASE transformation<br />
+          - Example 2: Text truncation<br />
+          - Example 3: Non-render context (title attribute)<br />
+          ✨ Use the hook when you need to process text before rendering!
         </small>
       </div>
     </div>

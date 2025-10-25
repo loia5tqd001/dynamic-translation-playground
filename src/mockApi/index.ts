@@ -3,6 +3,7 @@ import type {
   ShopInfoData,
   ProductReviewsData,
   VoucherInfoData,
+  ShippingInfoData,
 } from './types';
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -170,5 +171,37 @@ export const fetchVoucherInfo = async (
       terms: 'Valid until end of month. Cannot be combined with other offers. One use per customer.',
       expiry: '2024-10-31',
     },
+  };
+};
+
+/**
+ * Mock API for Shipping Info (static - no translation)
+ */
+export const fetchShippingInfo = async (): Promise<ShippingInfoData> => {
+  await delay(450);
+
+  return {
+    shipping_methods: [
+      {
+        id: 'standard',
+        name: 'Standard Shipping',
+        delivery_time: '5-7 business days',
+        cost: '$4.99',
+      },
+      {
+        id: 'express',
+        name: 'Express Shipping',
+        delivery_time: '2-3 business days',
+        cost: '$12.99',
+      },
+      {
+        id: 'overnight',
+        name: 'Overnight Delivery',
+        delivery_time: '1 business day',
+        cost: '$24.99',
+      },
+    ],
+    return_policy: '30-day money-back guarantee',
+    tracking_available: true,
   };
 };
