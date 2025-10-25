@@ -7,7 +7,11 @@ import type { ProductInfoData } from '../mockApi/types'
  * Pattern: No Anchor (Static Content Only)
  * This section displays basic product information - NO translation needed
  */
-export const ProductInfoSection = () => {
+export const ProductInfoSection = ({
+  onOpenSpecs,
+}: {
+  onOpenSpecs: () => void
+}) => {
   const [data, setData] = useState<ProductInfoData | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -62,6 +66,34 @@ export const ProductInfoSection = () => {
         <br />
         <small>(Product IDs, prices, and SKUs don't need translation)</small>
       </div>
+
+      {/* Button to open static specs drawer */}
+      <button
+        onClick={onOpenSpecs}
+        className="primary-button"
+        type="button"
+        style={{
+          marginTop: '16px',
+          width: '100%',
+          padding: '12px',
+          background: '#3b82f6',
+          color: 'white',
+          border: 'none',
+          borderRadius: '8px',
+          fontSize: '14px',
+          fontWeight: 'bold',
+          cursor: 'pointer',
+          transition: 'background 0.2s',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = '#2563eb'
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = '#3b82f6'
+        }}
+      >
+        📋 View Technical Specifications
+      </button>
     </div>
   )
 }

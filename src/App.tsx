@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ProductInfoSection } from './components/ProductInfoSection'
 import { ProductQADrawer } from './components/ProductQADrawer'
 import { ProductReviewsSection } from './components/ProductReviewsSection'
+import { ProductSpecsDrawer } from './components/ProductSpecsDrawer'
 import { ShippingInfoSection } from './components/ShippingInfoSection'
 import { VoucherInfoSection } from './components/VoucherInfoSection'
 import { GlobalTranslationProvider } from './sdk'
@@ -17,6 +18,7 @@ function App() {
 
   // Drawer state
   const [isQADrawerOpen, setIsQADrawerOpen] = useState(false)
+  const [isSpecsDrawerOpen, setIsSpecsDrawerOpen] = useState(false)
 
   // Get success flags based on scenario
   const getSuccessFlags = () => {
@@ -86,11 +88,35 @@ function App() {
               {showProductInfo && (
                 <div className="tree-branch">
                   <span className="branch-line">└─</span>
-                  <div className="tree-node section-node no-anchor">
+                  <div
+                    className="tree-node section-node no-anchor"
+                    style={{
+                      background: isSpecsDrawerOpen ? '#fef3c7' : undefined,
+                      border: isSpecsDrawerOpen
+                        ? '2px solid #fbbf24'
+                        : undefined,
+                    }}
+                  >
                     <span className="node-icon">📄</span>
                     <span className="node-label">Product Info</span>
-                    <span className="node-badge">Static (No Anchor)</span>
+                    <span className="node-badge">
+                      Static{' '}
+                      {isSpecsDrawerOpen ? '+ Static Drawer' : '(No Anchor)'}
+                    </span>
                   </div>
+                  {/* {isSpecsDrawerOpen && (
+                    <div style={{ marginLeft: '40px', marginTop: '8px' }}>
+                      <span className="branch-line">└─</span>
+                      <div
+                        className="tree-node section-node no-anchor"
+                        style={{ fontSize: '12px' }}
+                      >
+                        <span className="node-icon">📄</span>
+                        <span className="node-label">Specs Drawer</span>
+                        <span className="node-badge">Static Content</span>
+                      </div>
+                    </div>
+                  )} */}
                 </div>
               )}
               {showReviews && (
@@ -132,19 +158,6 @@ function App() {
                       Static + Dynamic Drawer
                     </span>
                   </div>
-                  {isQADrawerOpen && (
-                    <div style={{ marginLeft: '40px', marginTop: '8px' }}>
-                      <span className="branch-line">└─</span>
-                      <div
-                        className="tree-node section-node has-anchor"
-                        style={{ fontSize: '12px' }}
-                      >
-                        <span className="node-icon">⚓</span>
-                        <span className="node-label">Q&A Drawer</span>
-                        <span className="node-badge">Dynamic Content</span>
-                      </div>
-                    </div>
-                  )}
                 </div>
               )}
             </div>
@@ -314,7 +327,11 @@ function App() {
         </div>
 
         <main className="content">
-          {showProductInfo && <ProductInfoSection />}
+          {showProductInfo && (
+            <ProductInfoSection
+              onOpenSpecs={() => setIsSpecsDrawerOpen(true)}
+            />
+          )}
 
           {showReviews && (
             <ProductReviewsSection shouldSucceed={flags.reviews} />
@@ -329,11 +346,17 @@ function App() {
           )}
         </main>
 
-        {/* Product Q&A Drawer */}
+        {/* Product Q&A Drawer (Dynamic content) */}
         <ProductQADrawer
           isOpen={isQADrawerOpen}
           onClose={() => setIsQADrawerOpen(false)}
           shouldSucceed={flags.reviews}
+        />
+
+        {/* Product Specifications Drawer (Static content) */}
+        <ProductSpecsDrawer
+          isOpen={isSpecsDrawerOpen}
+          onClose={() => setIsSpecsDrawerOpen(false)}
         />
 
         <footer className="app-footer">
