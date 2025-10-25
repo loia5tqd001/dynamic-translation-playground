@@ -29,9 +29,9 @@ export const ProductReviewsSection = ({
 
   if (loading) {
     return (
-      <div className="section dynamic-section">
+      <div className='section dynamic-section'>
         <h2>⭐ Product Reviews (Review Team)</h2>
-        <div className="loading">Loading reviews...</div>
+        <div className='loading'>Loading reviews...</div>
       </div>
     );
   }
@@ -39,18 +39,18 @@ export const ProductReviewsSection = ({
   if (!data) return null;
 
   return (
-    <div className="section dynamic-section">
+    <div className='section dynamic-section'>
       <h2>⭐ Product Reviews (Review Team)</h2>
-      <div className="status-badge">
+      <div className='status-badge'>
         {data.translation_status === 1 ? (
-          <span className="status-success">✓ Translation Available</span>
+          <span className='status-success'>✓ Translation Available</span>
         ) : (
-          <span className="status-failed">✗ Translation Failed</span>
+          <span className='status-failed'>✗ Translation Failed</span>
         )}
       </div>
 
       {/* Static summary - no anchor */}
-      <div className="content-card">
+      <div className='content-card'>
         <p>
           <strong>Average Rating:</strong> {data.average_rating} / 5.0 ⭐
         </p>
@@ -61,15 +61,18 @@ export const ProductReviewsSection = ({
 
       {/* Anchor wraps only the dynamic content (review comments) */}
       <TranslationAnchor translation_status={data.translation_status}>
-        <div className="reviews-container">
+        <div className='reviews-container'>
           {data.reviews.map((review) => (
-            <div key={review.id} className="review-card">
-              <div className="review-header">
+            <div key={review.id} className='review-card'>
+              <div className='review-header'>
                 <strong>{review.username}</strong>
-                <span className="rating">{'⭐'.repeat(review.rating)}</span>
+                <span className='rating'>{'⭐'.repeat(review.rating)}</span>
               </div>
-              <p className="review-comment">
-                <TextTr original={review.comment} translated={review.comment_tr} />
+              <p className='review-comment'>
+                <TextTr
+                  original={review.comment}
+                  translation={review.comment_tr}
+                />
               </p>
               <small style={{ color: '#999' }}>{review.date}</small>
             </div>
@@ -77,11 +80,13 @@ export const ProductReviewsSection = ({
         </div>
       </TranslationAnchor>
 
-      <div className="team-note">
-        💡 <strong>Translation Pattern:</strong> Using <code>TextTr</code> component for direct rendering
+      <div className='team-note'>
+        💡 <strong>Translation Pattern:</strong> Using <code>TextTr</code>{' '}
+        component for direct rendering
         <br />
         <small>
-          Perfect for simple cases where you just need to display translated text as-is
+          Perfect for simple cases where you just need to display translated
+          text as-is
         </small>
       </div>
     </div>

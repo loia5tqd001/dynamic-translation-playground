@@ -36,8 +36,9 @@ export const ProductQADrawer = ({
   return (
     <>
       {/* Backdrop */}
-      <div
-        className="drawer-backdrop"
+      <button
+        type='button'
+        className='drawer-backdrop'
         onClick={onClose}
         style={{
           position: 'fixed',
@@ -53,7 +54,7 @@ export const ProductQADrawer = ({
 
       {/* Drawer */}
       <div
-        className="drawer"
+        className='drawer'
         style={{
           position: 'fixed',
           top: 0,
@@ -86,6 +87,7 @@ export const ProductQADrawer = ({
             </h2>
             <button
               onClick={onClose}
+              type='button'
               style={{
                 background: 'none',
                 border: 'none',
@@ -99,72 +101,95 @@ export const ProductQADrawer = ({
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
-              aria-label="Close drawer"
+              aria-label='Close drawer'
             >
               ✕
             </button>
           </div>
 
           {loading && (
-            <div className="loading" style={{ padding: '20px' }}>
+            <div className='loading' style={{ padding: '20px' }}>
               Loading Q&A...
             </div>
           )}
 
           {!loading && data && (
             <>
-              <div className="status-badge" style={{
-                marginBottom: '16px',
-                display: 'flex',
-                justifyContent: 'center'
-              }}>
+              <div
+                className='status-badge'
+                style={{
+                  marginBottom: '16px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+              >
                 {data.translation_status === 1 ? (
-                  <span className="status-success" style={{
-                    fontSize: '13px',
-                    padding: '6px 12px'
-                  }}>✓ Translation Available</span>
+                  <span
+                    className='status-success'
+                    style={{
+                      fontSize: '13px',
+                      padding: '6px 12px',
+                    }}
+                  >
+                    ✓ Translation Available
+                  </span>
                 ) : (
-                  <span className="status-failed" style={{
-                    fontSize: '13px',
-                    padding: '6px 12px'
-                  }}>✗ Translation Failed</span>
+                  <span
+                    className='status-failed'
+                    style={{
+                      fontSize: '13px',
+                      padding: '6px 12px',
+                    }}
+                  >
+                    ✗ Translation Failed
+                  </span>
                 )}
               </div>
 
               {/* Q&A Content with TranslationAnchor */}
               <TranslationAnchor translation_status={data.translation_status}>
-                <div className="content-card">
+                <div className='content-card'>
                   {data.questions.map((qa, index) => (
                     <div
                       key={qa.id}
                       style={{
                         marginBottom: '20px',
                         paddingBottom: '20px',
-                        borderBottom: index < data.questions.length - 1 ? '1px solid #e5e7eb' : 'none',
+                        borderBottom:
+                          index < data.questions.length - 1
+                            ? '1px solid #e5e7eb'
+                            : 'none',
                       }}
                     >
                       <div style={{ marginBottom: '12px' }}>
-                        <strong style={{
-                          color: '#1f2937',
-                          fontSize: '15px',
-                          display: 'block',
-                          lineHeight: '1.6'
-                        }}>
+                        <strong
+                          style={{
+                            color: '#1f2937',
+                            fontSize: '15px',
+                            display: 'block',
+                            lineHeight: '1.6',
+                          }}
+                        >
                           Q:{' '}
                           <TextTr
                             original={qa.question}
-                            translated={qa.question_tr}
+                            translation={qa.question_tr}
                           />
                         </strong>
                       </div>
-                      <div style={{
-                        color: '#4b5563',
-                        paddingLeft: '12px',
-                        fontSize: '14px',
-                        lineHeight: '1.6'
-                      }}>
+                      <div
+                        style={{
+                          color: '#4b5563',
+                          paddingLeft: '12px',
+                          fontSize: '14px',
+                          lineHeight: '1.6',
+                        }}
+                      >
                         <strong>A:</strong>{' '}
-                        <TextTr original={qa.answer} translated={qa.answer_tr} />
+                        <TextTr
+                          original={qa.answer}
+                          translation={qa.answer_tr}
+                        />
                       </div>
                       <div
                         style={{
@@ -182,14 +207,14 @@ export const ProductQADrawer = ({
               </TranslationAnchor>
 
               <div
-                className="team-note"
+                className='team-note'
                 style={{
                   marginTop: '20px',
                   background: '#fef3c7',
                   padding: '12px',
                   borderRadius: '8px',
                   fontSize: '13px',
-                  lineHeight: '1.6'
+                  lineHeight: '1.6',
                 }}
               >
                 <div style={{ marginBottom: '8px' }}>
@@ -201,8 +226,7 @@ export const ProductQADrawer = ({
                   • Button appears when content has translation_status = 1
                   <br />
                   • Button z-index (10000) is above drawer (9500)
-                  <br />
-                  • Button is draggable to avoid covering content
+                  <br />• Button is draggable to avoid covering content
                 </div>
               </div>
             </>
