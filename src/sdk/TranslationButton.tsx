@@ -28,10 +28,10 @@ export const TranslationButton = ({
   const [isDragging, setIsDragging] = useState(false)
   const [hasMoved, setHasMoved] = useState(false)
 
-  // Load persisted position from localStorage
+  // Load persisted position from sessionStorage
   const [dragPosition, setDragPosition] = useState<number | null>(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY)
+      const saved = sessionStorage.getItem(STORAGE_KEY)
       return saved ? parseFloat(saved) : null
     } catch {
       return null
@@ -114,9 +114,9 @@ export const TranslationButton = ({
       const newPosition = calculateNewPosition(e.clientY)
       setDragPosition(newPosition)
 
-      // Save to localStorage
+      // Save to sessionStorage
       try {
-        localStorage.setItem(STORAGE_KEY, newPosition.toString())
+        sessionStorage.setItem(STORAGE_KEY, newPosition.toString())
       } catch {
         // Ignore storage errors
       }
@@ -138,9 +138,9 @@ export const TranslationButton = ({
       const newPosition = calculateNewPosition(e.touches[0].clientY)
       setDragPosition(newPosition)
 
-      // Save to localStorage
+      // Save to sessionStorage
       try {
-        localStorage.setItem(STORAGE_KEY, newPosition.toString())
+        sessionStorage.setItem(STORAGE_KEY, newPosition.toString())
       } catch {
         // Ignore storage errors
       }

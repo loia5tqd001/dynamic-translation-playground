@@ -58,9 +58,9 @@ export const fetchProductReviews = async (
           username: 'Alex Chen',
           rating: 5,
           comment:
-            'Amazing sound quality! Battery lasts all day. Highly recommend for music lovers.',
-          comment_tr:
             'Chất lượng âm thanh tuyệt vời! Pin dùng cả ngày. Rất khuyến khích cho người yêu âm nhạc.',
+          comment_tr:
+            'Amazing sound quality! Battery lasts all day. Highly recommend for music lovers.',
           date: '2024-10-20',
         },
         {
@@ -68,9 +68,9 @@ export const fetchProductReviews = async (
           username: 'Maria Santos',
           rating: 4,
           comment:
-            'Good headphones for the price. Comfortable to wear for long periods.',
-          comment_tr:
             'Tai nghe tốt với mức giá này. Thoải mái khi đeo trong thời gian dài.',
+          comment_tr:
+            'Good headphones for the price. Comfortable to wear for long periods.',
           date: '2024-10-18',
         },
         {
@@ -78,9 +78,9 @@ export const fetchProductReviews = async (
           username: 'John Smith',
           rating: 5,
           comment:
-            'Best purchase this year! Connection is stable and sound is crystal clear.',
-          comment_tr:
             'Mua hàng tốt nhất năm nay! Kết nối ổn định và âm thanh trong trẻo.',
+          comment_tr:
+            'Best purchase this year! Connection is stable and sound is crystal clear.',
           date: '2024-10-15',
         },
       ],
@@ -98,7 +98,7 @@ export const fetchProductReviews = async (
         username: 'Alex Chen',
         rating: 5,
         comment:
-          'Amazing sound quality! Battery lasts all day. Highly recommend for music lovers.',
+          'Chất lượng âm thanh tuyệt vời! Pin dùng cả ngày. Rất khuyến khích cho người yêu âm nhạc.',
         date: '2024-10-20',
       },
       {
@@ -106,7 +106,7 @@ export const fetchProductReviews = async (
         username: 'Maria Santos',
         rating: 4,
         comment:
-          'Good headphones for the price. Comfortable to wear for long periods.',
+          'Tai nghe tốt với mức giá này. Thoải mái khi đeo trong thời gian dài.',
         date: '2024-10-18',
       },
       {
@@ -114,7 +114,7 @@ export const fetchProductReviews = async (
         username: 'John Smith',
         rating: 5,
         comment:
-          'Best purchase this year! Connection is stable and sound is crystal clear.',
+          'Mua hàng tốt nhất năm nay! Kết nối ổn định và âm thanh trong trẻo.',
         date: '2024-10-15',
       },
     ],
@@ -137,25 +137,25 @@ export const fetchVoucherInfo = async (
           id: 'V1',
           code: 'TECH20',
           discount: '20% OFF',
-          title: 'Tech Gadgets Sale - Save 20% on all electronics',
-          title_tr:
+          title:
             'Giảm giá Thiết bị Công nghệ - Tiết kiệm 20% cho tất cả đồ điện tử',
+          title_tr: 'Tech Gadgets Sale - Save 20% on all electronics',
           min_spend: '$50',
         },
         {
           id: 'V2',
           code: 'FREESHIP',
           discount: 'Free Shipping',
-          title: 'Free shipping on orders over $30',
-          title_tr: 'Miễn phí vận chuyển cho đơn hàng trên $30',
+          title: 'Miễn phí vận chuyển cho đơn hàng trên $30',
+          title_tr: 'Free shipping on orders over $30',
           min_spend: '$30',
         },
       ],
       voucher_terms: {
         terms:
-          'Valid until end of month. Cannot be combined with other offers. One use per customer.',
-        terms_tr:
           'Có hiệu lực đến cuối tháng. Không thể kết hợp với các ưu đãi khác. Một lần sử dụng mỗi khách hàng.',
+        terms_tr:
+          'Valid until end of month. Cannot be combined with other offers. One use per customer.',
         expiry: '2024-10-31',
       },
     }
@@ -169,20 +169,21 @@ export const fetchVoucherInfo = async (
         id: 'V1',
         code: 'TECH20',
         discount: '20% OFF',
-        title: 'Tech Gadgets Sale - Save 20% on all electronics',
+        title:
+          'Giảm giá Thiết bị Công nghệ - Tiết kiệm 20% cho tất cả đồ điện tử',
         min_spend: '$50',
       },
       {
         id: 'V2',
         code: 'FREESHIP',
         discount: 'Free Shipping',
-        title: 'Free shipping on orders over $30',
+        title: 'Miễn phí vận chuyển cho đơn hàng trên $30',
         min_spend: '$30',
       },
     ],
     voucher_terms: {
       terms:
-        'Valid until end of month. Cannot be combined with other offers. One use per customer.',
+        'Có hiệu lực đến cuối tháng. Không thể kết hợp với các ưu đãi khác. Một lần sử dụng mỗi khách hàng.',
       expiry: '2024-10-31',
     },
   }
@@ -234,29 +235,30 @@ export const fetchProductQA = async (
       questions: [
         {
           id: 'Q1',
-          question: 'Does this work with iPhone 15?',
-          question_tr: 'Cái này có hoạt động với iPhone 15 không?',
+          question: 'Cái này có hoạt động với iPhone 15 không?',
+          question_tr: 'Does this work with iPhone 15?',
           answer:
-            'Yes, it is fully compatible with iPhone 15 and all newer models.',
-          answer_tr:
             'Có, nó hoàn toàn tương thích với iPhone 15 và tất cả các mẫu mới hơn.',
+          answer_tr:
+            'Yes, it is fully compatible with iPhone 15 and all newer models.',
           date: '2024-10-22',
         },
         {
           id: 'Q2',
-          question: 'What is the battery life?',
-          question_tr: 'Thời lượng pin là bao lâu?',
-          answer: 'Up to 40 hours of continuous playback on a single charge.',
-          answer_tr: 'Lên đến 40 giờ phát liên tục trong một lần sạc.',
+          question: 'Thời lượng pin là bao lâu?',
+          question_tr: 'What is the battery life?',
+          answer: 'Lên đến 40 giờ phát liên tục trong một lần sạc.',
+          answer_tr:
+            'Up to 40 hours of continuous playback on a single charge.',
           date: '2024-10-20',
         },
         {
           id: 'Q3',
-          question: 'Is it water resistant?',
-          question_tr: 'Có chống nước không?',
-          answer:
+          question: 'Có chống nước không?',
+          question_tr: 'Is it water resistant?',
+          answer: 'Có, nó có chuẩn chống nước IPX4 chống mồ hôi và mưa nhẹ.',
+          answer_tr:
             'Yes, it has IPX4 water resistance rating for sweat and light rain.',
-          answer_tr: 'Có, nó có chuẩn chống nước IPX4 chống mồ hôi và mưa nhẹ.',
           date: '2024-10-18',
         },
       ],
@@ -269,22 +271,21 @@ export const fetchProductQA = async (
     questions: [
       {
         id: 'Q1',
-        question: 'Does this work with iPhone 15?',
+        question: 'Cái này có hoạt động với iPhone 15 không?',
         answer:
-          'Yes, it is fully compatible with iPhone 15 and all newer models.',
+          'Có, nó hoàn toàn tương thích với iPhone 15 và tất cả các mẫu mới hơn.',
         date: '2024-10-22',
       },
       {
         id: 'Q2',
-        question: 'What is the battery life?',
-        answer: 'Up to 40 hours of continuous playback on a single charge.',
+        question: 'Thời lượng pin là bao lâu?',
+        answer: 'Lên đến 40 giờ phát liên tục trong một lần sạc.',
         date: '2024-10-20',
       },
       {
         id: 'Q3',
-        question: 'Is it water resistant?',
-        answer:
-          'Yes, it has IPX4 water resistance rating for sweat and light rain.',
+        question: 'Có chống nước không?',
+        answer: 'Có, nó có chuẩn chống nước IPX4 chống mồ hôi và mưa nhẹ.',
         date: '2024-10-18',
       },
     ],
