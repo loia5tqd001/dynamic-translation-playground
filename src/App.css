@@ -9,8 +9,8 @@
 
 .app-header {
   text-align: center;
-  margin-bottom: 30px;
-  padding: 30px 20px;
+  margin-bottom: 20px;
+  padding: 20px 20px;
   background: white;
   border-radius: 16px;
   border: 1px solid #e5e7eb;
@@ -18,7 +18,7 @@
 }
 
 .app-header h1 {
-  margin: 0 0 10px 0;
+  margin: 0;
   font-size: 2em;
   color: #111827;
   font-weight: 700;
@@ -47,9 +47,6 @@
 }
 
 .architecture-tree {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
 }
 
 .tree-node {
@@ -61,11 +58,22 @@
   margin: 5px 0;
 }
 
+.tree-node input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.tree-node.node-disabled {
+  opacity: 0.5;
+  filter: grayscale(0.3);
+}
+
 .provider-node {
-  background: #3b82f6;
+  background: #eff6ff;
   color: white;
   font-weight: bold;
-  border: 2px solid #2563eb;
+  border: 2px solid #dce3ee;
 }
 
 .provider-node .node-desc {
@@ -184,7 +192,8 @@
 }
 
 .control-group label {
-  display: block;
+  display: flex;
+  align-items: center;
   margin-bottom: 8px;
   color: #555;
 }
@@ -208,6 +217,82 @@
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Radio Group Styles */
+.radio-group {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.radio-option.radio-option {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px 10px;
+  border: 2px solid #e5e7eb;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+  flex: 1;
+}
+
+.radio-option.radio-option:hover {
+  border-color: #a5aec2;
+  background: #f0f9ff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.radio-option.radio-option input[type='radio'] {
+  margin-top: 2px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.radio-option.radio-option input[type='radio']:checked ~ .radio-label {
+  color: #1e40af;
+}
+
+.radio-option.radio-option:has(input[type='radio']:checked) {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.radio-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-left: 10px;
+  flex: 1;
+}
+
+.radio-icon {
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.radio-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.radio-text strong {
+  font-size: 14px;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.radio-description {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: normal;
 }
 
 .checkboxes {
@@ -273,8 +358,8 @@
 }
 
 .info-box {
-  background: #eff6ff;
-  border-left: 4px solid #3b82f6;
+  background: #f0fdf4;
+  border-left: 4px solid #10b981;
   padding: 15px;
   border-radius: 6px;
   margin-top: 20px;
@@ -289,6 +374,26 @@
 .info-box li {
   margin-bottom: 8px;
   color: #333;
+  line-height: 1.5;
+}
+
+.info-box p {
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+/* Collapsible Architecture Button */
+.control-panel button {
+  transition: all 0.2s ease;
+}
+
+.control-panel button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.control-panel button:active {
+  transform: translateY(0);
 }
 
 .content {
@@ -579,5 +684,26 @@
 
   .info-box li {
     margin-bottom: 8px;
+  }
+
+  /* Radio buttons on mobile */
+  .radio-group {
+    flex-direction: column;
+  }
+
+  .radio-option {
+    padding: 10px;
+  }
+
+  .radio-icon {
+    font-size: 20px;
+  }
+
+  .radio-text strong {
+    font-size: 14px;
+  }
+
+  .radio-description {
+    font-size: 12px;
   }
 }

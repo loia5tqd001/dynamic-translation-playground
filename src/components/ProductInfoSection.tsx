@@ -62,7 +62,7 @@ export const ProductInfoSection = ({
       </div>
 
       <div className="team-note">
-        💡 <strong>Pattern:</strong> No anchor needed for static content
+        💡 No anchor needed for static content
         <br />
         <small>(Product IDs, prices, and SKUs don't need translation)</small>
       </div>

@@ -81,8 +81,7 @@ export const ProductReviewsSection = ({
       </TranslationAnchor>
 
       <div className="team-note">
-        💡 <strong>Translation Pattern:</strong> Using <code>TextTr</code>{' '}
-        component for direct rendering
+        💡 Using <code>TextTr</code> component for direct rendering
         <br />
         <small>
           Perfect for simple cases where you just need to display translated

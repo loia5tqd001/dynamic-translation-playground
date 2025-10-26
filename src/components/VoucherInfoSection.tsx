@@ -99,36 +99,15 @@ export const VoucherInfoSection = ({
           <p>
             <strong>Expires:</strong> {data.voucher_terms.expiry}
           </p>
-          {/* Example 3: Using useTextTr hook for title attribute (non-render context) */}
-          <p>
-            <button
-              title={getText(
-                data.voucher_terms.terms,
-                data.voucher_terms.terms_tr,
-              )}
-              style={{
-                padding: '8px 16px',
-                background: '#3b82f6',
-                color: 'white',
-                border: 'none',
-                borderRadius: '6px',
-                cursor: 'pointer',
-              }}
-            >
-              View Full Terms
-            </button>
-          </p>
         </div>
       </TranslationAnchor>
 
       <div className="team-note">
-        💡 <strong>Translation Pattern:</strong> Using <code>useTextTr</code>{' '}
-        hook for text processing
+        💡 Using <code>useTextTr</code> hook for text processing
         <br />
         <small>
           - Example 1 (above): UPPERCASE transformation
           <br />- Example 2: Text truncation
-          <br />- Example 3: Non-render context (title attribute)
           <br />✨ Use the hook when you need to process text before rendering!
         </small>
       </div>

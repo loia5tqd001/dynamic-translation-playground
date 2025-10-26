@@ -98,8 +98,7 @@ export const ShippingInfoSection = ({ onOpenQA }: { onOpenQA: () => void }) => {
         className="team-note"
         style={{ background: '#fef3c7', borderColor: '#fbbf24' }}
       >
-        💡 <strong>Pattern:</strong> Static section that can trigger dynamic
-        content
+        💡 Static section that can trigger dynamic content
         <br />
         <small>
           - This section itself is static (no anchor)
